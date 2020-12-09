@@ -1,0 +1,41 @@
+﻿@model NewBook.Models.ViewModels.ShoppinCartVM;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<div class="row">
+    <div class="col">
+        @if (Model.CartList.Count() > 0)
+        {
+            <div class="card">
+                <div class="card-header">                    
+                </div>
+                <div class="card-body">
+                    @foreach (var item in Model.CartList)
+                    {
+                        <div> Product Name: @item.Product.Name</div>
+                        <div><img src="@item.Product.ImageUrl" /></div>
+                        <div>@item.Price <span>*</span> @item.Count </div>
+                        <div><a class="btn btn-info" asp-action="Plus" asp-route-cartid="@item.Id">+</a>
+                             <a class="btn btn-info" asp-action="Minus" asp-route-cartid="@item.Id">-</a>
+                             <a class="btn btn-info" asp-action="Delete" asp-route-cartid="@item.Id">Delete</a>
+                    </div>
+                        
+                    }
+                </div>
+                <div class="card-footer">
+                    <div>Order Total: @Model.Orderheader.OrderTotal</div>
+                    <a class="btn btn-info" asp-action="Summary">Summary</a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div>No Items In Cart</div>
+        }
+    </div>
+
+</div>

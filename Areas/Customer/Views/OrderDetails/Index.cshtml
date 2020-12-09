@@ -1,0 +1,43 @@
+﻿@model IEnumerable<NewBook.Models.OrderHeader>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<div>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Category
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" asp-action="GetOrderDetails" asp-route-status="InProgress">InProgress</a>
+            <a class="dropdown-item" asp-action="GetOrderDetails" asp-route-status="Pending">Pending</a>
+            <a class="dropdown-item" asp-action="GetOrderDetails" asp-route-status="Cancelled">Cancelled</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+    </li>
+</div>
+<div class="row">
+    <div class="col">
+        <table>
+            <thead>
+            <th>OrderDate</th>
+            <th>PaymentStatus</th>
+            <th>Order Total</th>
+            </thead>
+            @foreach (var lst in Model)
+            {
+                <tr>
+                    <td>@lst.OrderDate</td>
+                    <td>@lst.PaymentStatus</td>
+                    <td>@lst.OrderTotal</td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+

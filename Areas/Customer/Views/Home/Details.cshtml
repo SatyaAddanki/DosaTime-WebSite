@@ -1,0 +1,21 @@
+﻿@model ShoppingCart
+
+<form method="post">
+    <input type="hidden" asp-for="@Model.ProductId"/>
+    <div class="Card">
+        <div class="card-header">
+            <p>Name : @Model.Product.Name</p>
+            <p>Title:@Model.Product.Title</p>
+            <p>Category: @Model.Product.Category.Name</p>
+        </div>
+        <div class="card-body">
+            <img src="@Model.Product.ImageUrl" />
+            <p>Price: $ @Model.Product.Price</p>
+            <p>Count</p><input asp-for="@Model.Count" class="form-control" />
+        </div>
+        <div class="card-footer">
+            <a class="btn btn-info form-control" asp-action="Index">Back</a>
+            <button class="btn btn-info form-control" asp-action="Details">Add to Cart</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,59 @@
+﻿@model NewBook.Models.ViewModels.ShoppinCartVM;
+@using Microsoft.Extensions.Options
+@inject IOptions<NewBook.Utility.Stripe> stripe
+@{
+    ViewData["Title"] = "Summary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Summary</h1>
+<form method="post">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header"></div>
+                <div class="card-body">
+                    Products:
+                    @foreach (var item in Model.CartList)
+                    {
+                        <div>@item.Product.Name</div>
+                        <div><img src="@item.Product.ImageUrl" /></div>
+                        <div>Price: @(item.Product.Price * item.Count)</div>
+                    }
+                    OrderTotal :
+                    <div>@Model.Orderheader.OrderTotal</div>
+                    Address:
+                    <input asp-for="Orderheader.ApplicationUser.Name" />
+                    <input asp-for="Orderheader.ApplicationUser.PhoneNumber" />
+                    <input asp-for="Orderheader.ApplicationUser.PostalCode" />
+                    <input asp-for="Orderheader.ApplicationUser.Address" />
+                </div>
+                <div class="card-footer">
+                    @{
+                        var OrderTotalForStripe = Model.Orderheader.OrderTotal * 100;
+                    }
+
+                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            data-key="@stripe.Value.Publishablekey"
+                            data-amount="@OrderTotalForStripe"
+                            data-name="New Book"
+                            data-label="Place Order"
+                            data-description="Get Books, For Less"
+                            data-locale="auto"
+                            data-allow-remember-me="false"
+                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png">
+                    </script>
+                    <script>
+                        document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
+                    </script>
+                    <button type="submit" value="Place Order" class="btn btn-success form-control">Place Order</button>
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</form>
+

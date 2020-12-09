@@ -1,0 +1,34 @@
+﻿
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-6">
+        <h2>Users</h2>
+    </div>
+    <div class="col-6 text-right ">
+        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary">New</a>
+  
+
+    </div>
+</div>
+<div>
+    <table id="tblData" class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr class="table-info">
+                <th>Name</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+
+@section Scripts{
+    <script src="~/js/Users.js"></script>
+}
+
+

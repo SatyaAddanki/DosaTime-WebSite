@@ -1,0 +1,46 @@
+﻿@model NewBook.Models.Category
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Update";
+}
+
+<form method="post" >
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="container">
+        <div class="row border">
+            <div class="col-12">
+                @if (Model.Id == 0)
+                {
+                    title = "Create";
+                    <h2>@title</h2>
+                }
+            </div>
+            <div class="col-6">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-6">
+                @if (Model.Id == 0)
+                {
+                    <partial name="CreatePartial" />
+                }
+                else
+                {
+                    <partial name="EditPartial" model="Model.Id" />
+                }
+
+            </div>
+        </div>
+
+
+    </div>
+</form>
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
